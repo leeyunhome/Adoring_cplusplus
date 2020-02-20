@@ -10,8 +10,16 @@ Account::Account()
 Account::Account(const char* name_in, int id_in, int balance_in)
 	: id(id_in), balance(balance_in)
 {
+	id = id_in;
+	balance = balance_in;
 	name = new char[strlen(name_in) + 1];
 	strcpy(name, name_in);
+}
+Account::Account(const Account& acc)
+	: id(acc.id), balance(acc.balance)
+{
+	name = new char[strlen(acc.name) + 1];
+	strcpy(name, acc.name);
 }
 Account::~Account()
 {
@@ -19,17 +27,17 @@ Account::~Account()
 	id = 0;
 	balance = 0;
 }
-int Account::getId()
+int Account::getId() const
 {
 	return id;
 }
 
-int Account::getBalance()
+int Account::getBalance() const
 {
 	return balance;
 }
 
-char* Account::getName()
+const char* Account::getName() const
 {
 	return name;
 }

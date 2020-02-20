@@ -50,6 +50,7 @@ void AccountManager::openAnAccount()
 	cout << "3. General" << endl;
 	cin >> accountType;
 
+	cout << "open an account -----" << endl;
 	cout << "Input name >> ";
 	cin >> name;
 	cout << "Input id >> ";
@@ -90,6 +91,7 @@ void AccountManager::deposit()
 		if (account[i]->getId() == id)
 		{
 			account[i]->AddMoney(money);
+			cout << "deposit complete" << endl;
 			return;
 		}
 	}
@@ -117,6 +119,7 @@ void AccountManager::withdraw()
 			else
 			{
 				account[i]->MinMoney(money);
+				cout << "withdraw complete" << endl;
 				return;
 			}
 			
@@ -125,7 +128,7 @@ void AccountManager::withdraw()
 	cout << "Invalid id" << endl;
 }
 
-void AccountManager::inquire()
+void AccountManager::inquire()		// inquire total balance
 {
 	for (int i = 0; i < index; ++i)
 	{

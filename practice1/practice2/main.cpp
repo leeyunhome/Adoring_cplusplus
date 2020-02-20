@@ -25,9 +25,10 @@ int main()
 	while (1)
 	{
 		manager.printMenu();
+		cout << " choice: ";
 		cin >> choice;
 
-		switch (choice)
+;		switch (choice)
 		{
 		case OPEN:
 			manager.openAnAccount();

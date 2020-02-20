@@ -8,7 +8,7 @@
 class AccountManager
 {
 private:
-	Account* account[100];
+	Account* account[100];	// Account 저장을 위한 배열
 	int index;
 public:
 	AccountManager(int index_in = 0);
