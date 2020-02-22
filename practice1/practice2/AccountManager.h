@@ -3,11 +3,13 @@
 #include "ContribAccount.h"
 #include "AccountContainer.h"
 
+typedef Account* Element;
+
 class AccountManager
 {
 private:
 	//Account* account[100];	// Account 저장을 위한 배열
-	Container con;
+	Container<Element> con;
 	// int index;				// 저장된 Account 수 : 필요없다!
 
 public:
