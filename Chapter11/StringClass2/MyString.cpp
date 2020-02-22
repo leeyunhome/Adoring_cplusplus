@@ -3,18 +3,33 @@
 #include "MyString.h"
 
 String::String(const char* string_in)
-	: m_length(0)
 {
-	string = new char[strlen(string_in) + 1];
-	strcpy(string, string_in);
-	m_length = (int)strlen(string_in);
+	m_length = (string_in != NULL ? strlen(string_in) + 1 : 1);
+	string = new char[m_length];
+
+	if (string_in != NULL)
+		strcpy(string, string_in);
 }
 
 String::String(const String& str)
 {
-	string = new char[strlen(str.string) + 1];
-	strcpy(string, str.string);
 	m_length = str.m_length;
+	string = new char[m_length];
+	strcpy(string, str.string);
+}
+String::~String()
+{
+	delete[] string;
+	//if (string != nullptr)
+	//{
+	//	delete[] string;
+	//	//string = nullptr;
+	//	//m_length = 0;
+	//}
+	//else
+	//{
+
+	//}
 }
 
 String& String::operator=(const String& str)
@@ -24,28 +39,48 @@ String& String::operator=(const String& str)
 		return *this;
 	}
 	delete[] string;
-	string = new char[strlen(str.string) + 1];
+	m_length = str.m_length;
+	string = new char[m_length];
 	strcpy(string, str.string);
-	return *this;
+	return *this;	// 연속적인 대입 연산을 허용하기 위해
 }
 
 String& String::operator+=(const String& str)
 {
-	char* temp = this->string;
-	string = new char[strlen(str.string) + m_length + 1];
-	strcpy(string, temp);
-	strcat(this->string, str.string);
+	m_length = m_length + str.m_length - 1;
+	char* tStr = new char[m_length];
+	strcpy(tStr, string);
+	delete[] string;
+
+	strcat(tStr, str.string);
+	string = tStr;
 	return *this;
+	/*char* temp = this->string;
+	string = new char[m_length + str.m_length - 1];
+	strcpy(string, temp);
+	strcat(string, str.string);
+
+	delete[] temp;
+	return *this;*/
 }
 
-String& String::operator+ (const String& str)
+String String::operator+ (const String& str)
 {
-	char* temp = this->string;
-	string = new char[m_length + strlen(str.string) + 1];
-	//strcpy(this->string, this->string);
-	strcpy(string, temp);
-	strcat(this->string, str.string);
-	return *this;
+	char* tStr = new char[m_length + str.m_length - 1];
+	strcpy(tStr, string);
+	strcat(tStr, str.string);
+
+	String temp(tStr);
+	delete[] tStr;
+	return temp;
+	//char* temp = this->string;
+	//string = new char[m_length + str.m_length - 1];
+	////strcpy(this->string, this->string);
+	//strcpy(string, temp);
+	//strcat(this->string, str.string);
+
+	//delete[] temp;
+	//return *this;
 }
 
 bool String::operator == (const String& str)
@@ -63,6 +98,9 @@ std::ostream& operator << (std::ostream& out, const String& str)
 
 std::istream& operator >> (std::istream& in, String& str)
 {
-	in >> str.string;
+	char in_str[100];
+	in >> in_str;
+
+	str = String(in_str);
 	return in;
 }

@@ -21,6 +21,18 @@ Account::Account(const Account& acc)
 	name = new char[strlen(acc.name) + 1];
 	strcpy(name, acc.name);
 }
+Account& Account::operator=(const Account& acc)
+{
+	if (this == &acc)
+	{
+		return *this;
+	}
+	delete[] name;
+	name = new char[strlen(acc.name) + 1];
+	strcpy(name, acc.name);
+	
+}
+
 Account::~Account()
 {
 	delete[] name;

@@ -8,29 +8,17 @@ class String
 {
 private:
 	char* string;
-	int m_length;
+	size_t m_length;
 
 public:
 	//String() {};
-	String(const char* string_in = "No name");
+	String(const char* string_in = NULL);
 	String(const String& str);
-	/*~String()
-	{
-		if (string != nullptr)
-		{
-			delete[] string;
-			string = nullptr;
-			m_length = 0;
-		}
-		else
-		{
-
-		}
-	}*/
+	~String();
 	
 	String& operator=(const String& str);
 	String& operator+=(const String& str);
-	String& operator+ (const String& str);
+	String operator+ (const String& str);
 	bool operator == (const String& str);
 
 	friend std::ostream& operator << (std::ostream& out, const String& str);

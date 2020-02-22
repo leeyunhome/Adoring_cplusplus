@@ -16,6 +16,7 @@ public:
 	Account();
 	Account(const char* name_in, int id_in, int balance_in);
 	Account(const Account& acc);
+	Account& operator=(const Account& acc);
 	~Account();
 	int getId() const;
 	int getBalance() const;

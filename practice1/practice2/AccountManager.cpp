@@ -4,14 +4,14 @@
 
 using namespace std;
 
-AccountManager::AccountManager(int index_in)
-	: index(index_in)
+AccountManager::AccountManager()
 {
+	
 }
 
 void AccountManager::addAnAccount(Account* acc)
 {
-	account[index++] = acc;
+	con.Insert(acc);
 	/*for (int i = 0; i < index; ++i)
 	{
 		strcpy(account[i]->getName(), acc->getName());
@@ -86,11 +86,11 @@ void AccountManager::deposit()
 	cout << "Input money >> ";
 	cin >> money;
 
-	for (int i = 0; i < index; ++i)
+	for (int i = 0; i < con.GetElemSum(); ++i)
 	{
-		if (account[i]->getId() == id)
+		if (con.GetItem(i)->getId() == id)
 		{
-			account[i]->AddMoney(money);
+			con.GetItem(i)->AddMoney(money);
 			cout << "deposit complete" << endl;
 			return;
 		}
@@ -107,18 +107,18 @@ void AccountManager::withdraw()
 	cout << "Input money >> ";
 	cin >> money;
 
-	for (int i = 0; i < index; ++i)
+	for (int i = 0; i < con.GetElemSum(); ++i)
 	{
-		if (account[i]->getId() == id)
+		if (con.GetItem(i)->getId() == id)
 		{
-			if (account[i]->getBalance() < money)
+			if (con.GetItem(i)->getBalance() < money)
 			{
 				cout << "Not enough money" << endl;
 				return;
 			}
 			else
 			{
-				account[i]->MinMoney(money);
+				con.GetItem(i)->MinMoney(money);
 				cout << "withdraw complete" << endl;
 				return;
 			}
@@ -130,9 +130,9 @@ void AccountManager::withdraw()
 
 void AccountManager::inquire()		// inquire total balance
 {
-	for (int i = 0; i < index; ++i)
+	for (int i = 0; i < con.GetElemSum(); ++i)
 	{
-		account[i]->ShowAllData();
+		con.GetItem(i)->ShowAllData();
 	}
 }
 
