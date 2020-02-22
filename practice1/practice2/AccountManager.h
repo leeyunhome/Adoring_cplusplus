@@ -1,14 +1,14 @@
 #pragma once
-#include "Account.h"
-#include "AccountContainer.h"
 #include "CreditAccount.h"
 #include "ContribAccount.h"
+#include "AccountContainer.h"
 
 class AccountManager
 {
 private:
 	//Account* account[100];	// Account 저장을 위한 배열
 	Container con;
+	// int index;				// 저장된 Account 수 : 필요없다!
 
 public:
 	AccountManager();

@@ -40,7 +40,8 @@ void AccountManager::printMenu()
 }
 void AccountManager::openAnAccount()
 {
-	char name[NMAX];
+	//char name[NMAX];
+	String name;
 	int id;
 	int money;
 	int accountType;

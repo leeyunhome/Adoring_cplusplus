@@ -4,6 +4,7 @@
 
 typedef Account* Element;
 
+
 class Container
 {
 	Element* arr;		// 객체 포인터 배열을 가리키는 포인터;

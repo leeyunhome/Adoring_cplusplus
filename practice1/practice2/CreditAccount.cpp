@@ -1,6 +1,6 @@
 #include "CreditAccount.h"
 
-CreditAccount::CreditAccount(const char* name_in, int id_in, int balance_in)
+CreditAccount::CreditAccount(String name_in, int id_in, int balance_in)
 	: Account(name_in, id_in, balance_in += balance_in * 0.01)
 {
 

@@ -153,6 +153,7 @@
     <ClCompile Include="ContribAccount.cpp" />
     <ClCompile Include="CreditAccount.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MyString.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
@@ -160,6 +161,7 @@
     <ClInclude Include="AccountManager.h" />
     <ClInclude Include="ContribAccount.h" />
     <ClInclude Include="CreditAccount.h" />
+    <ClInclude Include="MyString.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

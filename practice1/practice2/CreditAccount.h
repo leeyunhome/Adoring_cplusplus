@@ -5,6 +5,6 @@ class CreditAccount : public Account
 {
 private:
 public:
-	CreditAccount(const char* name_in, int id_in, int balance_in);
+	CreditAccount(String name_in, int id_in, int balance_in);
 	virtual void AddMoney(int money_in);
 };
