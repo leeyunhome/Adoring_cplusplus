@@ -161,6 +161,7 @@
     <ClInclude Include="AccountManager.h" />
     <ClInclude Include="ContribAccount.h" />
     <ClInclude Include="CreditAccount.h" />
+    <ClInclude Include="Except.h" />
     <ClInclude Include="MyString.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "AccountManager.h"
+#include "Except.h"
 #include <iostream>
 
 using namespace std;
@@ -80,23 +81,34 @@ void AccountManager::openAnAccount()
 
 void AccountManager::deposit()
 {
-	int id;
-	int money;
-	cout << "Input id >> ";
-	cin >> id;
-	cout << "Input money >> ";
-	cin >> money;
-
-	for (int i = 0; i < con.GetElemSum(); ++i)
+	try
 	{
-		if (con.GetItem(i)->getId() == id)
+		int id;
+		int money;
+		cout << "Input id >> ";
+		cin >> id;
+		cout << "Input money >> ";
+		cin >> money;
+		if (money < 0)
+			throw Except(money);
+		for (int i = 0; i < con.GetElemSum(); ++i)
 		{
-			con.GetItem(i)->AddMoney(money);
-			cout << "deposit complete" << endl;
-			return;
+			if (con.GetItem(i)->getId() == id)
+			{
+				con.GetItem(i)->AddMoney(money);
+				cout << "deposit complete" << endl;
+				return;
+			}
 		}
+		cout << "Invalid id" << endl;
 	}
-	cout << "Invalid id" << endl;
+	catch (Except& ex)
+	{
+		ex.What();
+	}
+	
+
+	
 }
 
 void AccountManager::withdraw()
@@ -108,25 +120,37 @@ void AccountManager::withdraw()
 	cout << "Input money >> ";
 	cin >> money;
 
+	
 	for (int i = 0; i < con.GetElemSum(); ++i)
 	{
 		if (con.GetItem(i)->getId() == id)
 		{
-			if (con.GetItem(i)->getBalance() < money)
+			try
 			{
-				cout << "Not enough money" << endl;
-				return;
+				if (con.GetItem(i)->getBalance() < money)
+				{
+					throw Except(money);
+				}
+				else
+				{
+					con.GetItem(i)->MinMoney(money);
+					cout << "withdraw complete" << endl;
+					return;
+				}
 			}
-			else
+			catch (Except& ex)
 			{
-				con.GetItem(i)->MinMoney(money);
-				cout << "withdraw complete" << endl;
-				return;
+				ex.What();
 			}
 			
+			
+			
+		}
+		else
+		{
+			cout << "Invalid id" << endl;
 		}
 	}
-	cout << "Invalid id" << endl;
 }
 
 void AccountManager::inquire()		// inquire total balance
